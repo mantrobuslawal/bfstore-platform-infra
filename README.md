@@ -1,47 +1,47 @@
-    # bfstore Platform Infrastructure
+# bfstore Platform Infrastructure
 
-    Cloud infrastructure foundations for bfstore, including Kubernetes clusters, networking, managed data services, IAM, observability, and multi-cloud platform provisioning.
+Cloud infrastructure foundations for bfstore, including Kubernetes clusters, networking, managed data services, IAM, observability, and multi-cloud platform provisioning.
 
-    ## Repository status
+## Repository status
 
-    This repository is an early bfstore portfolio repository. It is currently being set up with initial structure, documentation, and direction before implementation work begins.
+This repository is an early bfstore portfolio repository. It is currently being set up with initial structure, documentation, and direction before implementation work begins.
 
-    ## Purpose
+## Purpose
 
-    This repository will hold the infrastructure foundations required to run the bfstore platform in cloud and Kubernetes environments.
+This repository will hold the infrastructure foundations required to run the bfstore platform in cloud and Kubernetes environments.
 
-    bfstore is a cloud-native ecommerce platform for developer-themed homeware. This repository is part of the wider bfstore portfolio and is intended to demonstrate senior platform engineering, DevSecOps, Kubernetes, cloud infrastructure, and developer experience capability.
+bfstore is a cloud-native ecommerce platform for developer-themed homeware. This repository is part of the wider bfstore portfolio and is intended to demonstrate senior platform engineering, DevSecOps, Kubernetes, cloud infrastructure, and developer experience capability.
 
-    ## Scope
+## Scope
 
-    This repository will cover:
+This repository will cover:
 
-    - Cloud networking and environment foundations
+- Cloud networking and environment foundations
 - Kubernetes cluster provisioning
 - Managed database and event infrastructure foundations
 - IAM, service identity, and least-privilege patterns
 - Observability infrastructure foundations
 - Environment-specific infrastructure definitions
 
-    ## Out of scope
+  ## Out of scope
 
-    This repository will not own:
+  This repository will not own:
 
-    - Application source code
+- Application source code
 - Service-level business logic
 - Long-lived Kubernetes application manifests owned by GitOps
 - Reusable Terraform modules intended to be shared across projects
 
     ## Suggested repository structure
 
-    - `envs/                 # Environment-specific infrastructure entrypoints`
+- `envs/                 # Environment-specific infrastructure entrypoints`
 - `clouds/               # Cloud-specific infrastructure experiments`
 - `docs/                 # Architecture notes, diagrams, ADRs`
 - `scripts/              # Local helper scripts`
 
-    ## Initial roadmap
+  ## Initial roadmap
 
-    - [ ] Define the first local-to-cloud infrastructure target
+- [ ] Define the first local-to-cloud infrastructure target
 - [ ] Create baseline network and Kubernetes cluster design
 - [ ] Document environment naming and tagging standards
 - [ ] Add security and least-privilege design notes
