@@ -1,5 +1,7 @@
 # bfstore Platform Infrastructure
 
+![bfstore - Borough Furniture Store logo](bfstore_infra_logo.png)
+
 Cloud infrastructure foundations for bfstore, including Kubernetes clusters, networking, managed data services, IAM, observability, and multi-cloud platform provisioning.
 
 ## Repository status
