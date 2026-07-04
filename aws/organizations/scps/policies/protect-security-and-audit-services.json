@@ -1,0 +1,84 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyCloudTrailTamperingExceptApprovedSecurityRoles",
+      "Effect": "Deny",
+      "Action": [
+        "cloudtrail:DeleteTrail",
+        "cloudtrail:StopLogging",
+        "cloudtrail:UpdateTrail",
+        "cloudtrail:PutEventSelectors",
+        "cloudtrail:PutInsightSelectors"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-security-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-security-breakglass",
+            "arn:aws:iam::*:role/bfstore-log-archive-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-log-archive-breakglass"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyConfigTamperingExceptApprovedSecurityRoles",
+      "Effect": "Deny",
+      "Action": [
+        "config:DeleteConfigurationRecorder",
+        "config:DeleteDeliveryChannel",
+        "config:DeleteRetentionConfiguration",
+        "config:StopConfigurationRecorder"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-security-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-security-breakglass"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyGuardDutySecurityHubTamperingExceptApprovedSecurityRoles",
+      "Effect": "Deny",
+      "Action": [
+        "guardduty:DeleteDetector",
+        "guardduty:DisassociateFromMasterAccount",
+        "guardduty:DisassociateFromAdministratorAccount",
+        "guardduty:StopMonitoringMembers",
+        "securityhub:DisableSecurityHub",
+        "securityhub:DisassociateFromAdministratorAccount"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-security-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-security-breakglass"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyAccessAnalyzerTamperingExceptApprovedSecurityRoles",
+      "Effect": "Deny",
+      "Action": [
+        "access-analyzer:DeleteAnalyzer",
+        "access-analyzer:DeleteArchiveRule"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-security-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-security-breakglass"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyProdKMSDestructiveActionsExceptBreakglass",
+      "Effect": "Deny",
+      "Action": [
+        "kms:ScheduleKeyDeletion",
+        "kms:DisableKey"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-prod-breakglass"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyProdBackupTamperingExceptApprovedRoles",
+      "Effect": "Deny",
+      "Action": [
+        "backup:DeleteBackupVault",
+        "backup:DeleteBackupVaultAccessPolicy",
+        "backup:DeleteBackupVaultLockConfiguration",
+        "backup:DeleteRecoveryPoint"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-prod-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-prod-breakglass"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyProdStateBucketDeletionOrWeakeningExceptBreakglass",
+      "Effect": "Deny",
+      "Action": [
+        "s3:DeleteBucket",
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion",
+        "s3:PutBucketVersioning",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutBucketPolicy"
+      ],
+      "Resource": [
+        "arn:aws:s3:::bfstore-prod-*-opentofu-state",
+        "arn:aws:s3:::bfstore-prod-*-opentofu-state/*"
+      ],
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-prod-breakglass"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyLogArchiveBucketDeletionOrWeakeningExceptApprovedRoles",
+      "Effect": "Deny",
+      "Action": [
+        "s3:DeleteBucket",
+        "s3:DeleteBucketPolicy",
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion",
+        "s3:PutBucketAcl",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutBucketVersioning",
+        "s3:PutLifecycleConfiguration"
+      ],
+      "Resource": [
+        "arn:aws:s3:::bfstore-*-log-archive",
+        "arn:aws:s3:::bfstore-*-log-archive/*"
+      ],
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-log-archive-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-log-archive-breakglass"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyLogArchiveKMSKeyDeletionOrWeakeningExceptApprovedRoles",
+      "Effect": "Deny",
+      "Action": [
+        "kms:ScheduleKeyDeletion",
+        "kms:DisableKey",
+        "kms:PutKeyPolicy"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/bfstore-log-archive-github-iac-apply",
+            "arn:aws:iam::*:role/bfstore-log-archive-breakglass"
+          ]
+        }
+      }
+    }
+  ]
+}
